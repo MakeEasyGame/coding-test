@@ -1,14 +1,12 @@
-# 숫자의 표현
+# 짝지어 제거하기
 
-def solution(n):
-    answer = 1
-    cnt = 2
-
-    while sum(range(1, cnt+1)) <= n:
-        nums = range(1, cnt+1)
-        if sum(map(lambda x: (n - sum(range(1, cnt+1))) // cnt + x, nums)) == n:
-            answer+=1
-
-        cnt+=1
-
-    return answer
+def solution(s):
+    stack = []
+    
+    for char in s:
+        if stack and stack[-1] == char:
+            stack.pop()
+        else:
+            stack.append(char)
+    
+    return 0 if stack else 1
