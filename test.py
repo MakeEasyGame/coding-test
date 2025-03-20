@@ -1,12 +1,16 @@
-# 짝지어 제거하기
+# 구명보트
 
-def solution(s):
-    stack = []
-    
-    for char in s:
-        if stack and stack[-1] == char:
-            stack.pop()
-        else:
-            stack.append(char)
-    
-    return 0 if stack else 1
+from collections import deque
+
+def solution(people, limit):
+    answer = 0
+    people = deque(sorted(people, reverse=True))
+
+    while people:
+        p = people.popleft()
+        answer += 1
+
+        if people and limit - p >= people[-1]:
+            people.pop()
+
+    return answer
