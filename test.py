@@ -1,16 +1,19 @@
-# 구명보트
+# [1차] 캐시
 
 from collections import deque
 
-def solution(people, limit):
+def solution(cacheSize, cities):
     answer = 0
-    people = deque(sorted(people, reverse=True))
+    cache = deque(maxlen=cacheSize)
+    
+    for city in cities:
+        city = city.lower()
+        if city in cache: # hit
+            cache.remove(city)
+            answer += 1
+        else: # miss
+            answer += 5
 
-    while people:
-        p = people.popleft()
-        answer += 1
-
-        if people and limit - p >= people[-1]:
-            people.pop()
+        cache.append(city)
 
     return answer
