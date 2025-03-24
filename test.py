@@ -1,19 +1,13 @@
-# [1차] 캐시
+# 튜플
 
-from collections import deque
-
-def solution(cacheSize, cities):
-    answer = 0
-    cache = deque(maxlen=cacheSize)
+def solution(s):
+    answer = []
+    lst = list(map(lambda x: x.split(','), s[2:-2].split('},{')))
     
-    for city in cities:
-        city = city.lower()
-        if city in cache: # hit
-            cache.remove(city)
-            answer += 1
-        else: # miss
-            answer += 5
-
-        cache.append(city)
+    s = sorted(lst, key=lambda x: len(x))
+    
+    for i in range(len(s)):
+        if i>0: answer.append(int(*(set(s[i]) - set(s[i-1]))))
+        else: answer.append(int(*s[i]))
 
     return answer
