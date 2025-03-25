@@ -1,13 +1,13 @@
-# 튜플
+# 전화번호 목록
 
-def solution(s):
-    answer = []
-    lst = list(map(lambda x: x.split(','), s[2:-2].split('},{')))
-    
-    s = sorted(lst, key=lambda x: len(x))
-    
-    for i in range(len(s)):
-        if i>0: answer.append(int(*(set(s[i]) - set(s[i-1]))))
-        else: answer.append(int(*s[i]))
+def solution(phone_book):
+    answer = True
+
+    phone_book.sort()
+
+    for i in range(len(phone_book)-1):
+        if phone_book[i+1].startswith(phone_book[i]):
+            answer = False
+            break
 
     return answer
