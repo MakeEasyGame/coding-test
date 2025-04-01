@@ -1,16 +1,14 @@
-# 압축
+# 더 맵게
 
-def solution(msg):
-    w = ''
-    dict = {i: ord(i)-64 for i in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
-    answer = []
-    for c in msg:
-        print(w, c)
-        if w + c in dict.keys():
-            w = w + c
-        else:
-            dict[w + c] = max(dict.values()) + 1
-            answer.append(dict[w])
-            w = c
-    answer.append(dict[w])
-    return answer
+import heapq
+
+def solution(scoville, K):
+    answer = 0
+    heapq.heapify(scoville)
+    while len(scoville) > 1 and scoville[0] < K:
+        fst = heapq.heappop(scoville)
+        scd = heapq.heappop(scoville)
+        heapq.heappush(scoville, fst + (scd * 2))
+        answer+=1
+
+    return answer if scoville[0] >= K else -1
