@@ -1,14 +1,9 @@
-# 더 맵게
+# 땅따먹기
 
-import heapq
-
-def solution(scoville, K):
+def solution(land):
     answer = 0
-    heapq.heapify(scoville)
-    while len(scoville) > 1 and scoville[0] < K:
-        fst = heapq.heappop(scoville)
-        scd = heapq.heappop(scoville)
-        heapq.heappush(scoville, fst + (scd * 2))
-        answer+=1
+    for i in range(1, len(land)):
+        for j in range(4):
+            land[i][j] += max(land[i-1][k] for k in range(4) if k != j)
 
-    return answer if scoville[0] >= K else -1
+    return max(land[-1])
