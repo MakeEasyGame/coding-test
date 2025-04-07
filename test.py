@@ -1,9 +1,18 @@
-# 땅따먹기
+# 스킬트리
 
-def solution(land):
+def solution(skill, skill_trees):
     answer = 0
-    for i in range(1, len(land)):
-        for j in range(4):
-            land[i][j] += max(land[i-1][k] for k in range(4) if k != j)
+    for i in range(len(skill_trees)):
+        skill_trees[i] = list(filter(lambda x: x in skill, skill_trees[i]))
+        temp = 1
+        s = ''.join(skill_trees[i])
+        for j in range(len(s)):
+            if s[j] != skill[j]:
+                temp = 0
+                break
+        answer+=temp
+    
+    return answer
 
-    return max(land[-1])
+
+print(solution("CBD", ["BACDE", "CBADF", "AECB", "BDA"]))
