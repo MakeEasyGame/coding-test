@@ -1,16 +1,9 @@
-# 택배상자
+# 2 x n 타일링
 
-def solution(order):
-    stack = []
-    num = 1
-    idx = 0
-    while num <= len(order):
-        stack.append(num)
-        while stack and stack[-1] == order[idx]:
-            stack.pop()
-            idx+=1
-            if idx == len(order):
-                break
-        num+=1
-
-    return idx
+def solution(n):
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, (a + b) % 1000000007
+    return b
