@@ -1,18 +1,17 @@
-# 숫자 변환하기
+# 파일명 정렬
 
-def solution(x, y, n):
-    queue = [(x, 0)]
-    visited = set()
-    visited.add(x)
-    idx = 0
-    while idx < len(queue):
-        current, cnt = queue[idx]
-        idx += 1
-        if current == y:
-            return cnt
-        for i in (current+n, current*2, current*3):
-            if i <= y and i not in visited:
-                visited.add(i)
-                queue.append((i, cnt + 1))
+import re
 
-    return -1
+def get_filename(filename):
+    match = re.match(r'([^\d]+)(\d{1,5})', filename)
+    head = match.group(1)
+    number = match.group(2)
+    return head, number
+
+def solution(files):
+    parsed = []
+    for i, file in enumerate(files):
+        head, number = get_filename(file)
+        parsed.append((head.lower(), int(number), i, file))
+    parsed.sort(key=lambda x: (x[0], x[1], x[2]))
+    return [item[3] for item in parsed]
