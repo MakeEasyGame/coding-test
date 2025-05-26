@@ -1,17 +1,28 @@
 # 파일명 정렬
 
-import re
+def solution(m, n, board):
+    board = [list(row) for row in board]
+    removed = 0
+    while True:
+        remove = set()
+        for i in range(m - 1):
+            for j in range(n - 1):
+                block = board[i][j]
+                if block == ' ':
+                    continue
+                if block == board[i][j+1] == board[i+1][j] == board[i+1][j+1]:
+                    remove.update([(i, j), (i, j+1), (i+1, j), (i+1, j+1)])
+        if not remove:
+            break
+        for x, y in remove:
+            board[x][y] = ' '
+        removed += len(remove)
+        for col in range(n):
+            stack = []
+            for row in range(m-1, -1, -1):
+                if board[row][col] != ' ':
+                    stack.append(board[row][col])
+            for row in range(m-1, -1, -1):
+                board[row][col] = stack.pop(0) if stack else ' '
 
-def get_filename(filename):
-    match = re.match(r'([^\d]+)(\d{1,5})', filename)
-    head = match.group(1)
-    number = match.group(2)
-    return head, number
-
-def solution(files):
-    parsed = []
-    for i, file in enumerate(files):
-        head, number = get_filename(file)
-        parsed.append((head.lower(), int(number), i, file))
-    parsed.sort(key=lambda x: (x[0], x[1], x[2]))
-    return [item[3] for item in parsed]
+    return removed
