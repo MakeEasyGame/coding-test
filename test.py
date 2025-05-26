@@ -1,4 +1,4 @@
-# 파일명 정렬
+# [1차] 프렌즈4블록
 
 def solution(m, n, board):
     board = [list(row) for row in board]
