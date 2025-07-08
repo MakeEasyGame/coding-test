@@ -1,16 +1,16 @@
 import math
-while(True):
-    a = int(input())
-    if a == -1:
-        break
-    lst = []
-    for i in range(1, int(math.sqrt(a))+1):
-        if a % i == 0:
-            lst.append(i)
-            if a//i != a:
-                lst.append(a//i)
-    lst.sort()
-    if a == sum(lst):
-        print(a, '=', ' + '.join(map(str, lst)))
-    else:
-        print(a, 'is NOT perfect.')
+a = int(input())
+lst = map(int, input().split())
+result = 0
+def isPrime(n):
+    if n == 1:
+        return False
+    for i in range(2, int(math.sqrt(n))+1):
+        if n % i == 0:
+            return False
+    return True
+
+for i in lst:
+    if isPrime(i):
+        result+=1
+print(result)
