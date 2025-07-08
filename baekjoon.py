@@ -1,14 +1,13 @@
-a = int(input())
-result = 0
-
-for i in range(a):
-    s = str(i)
-    n = i
-    for j in s:
-        n+=int(j)
-    
-    if n == a:
-        result = i
-        break
-
-print(result)
+try:
+    while True:
+        a,b = map(int, input().split())
+        if a==0 and b==0:
+            break
+        elif b % a == 0:
+            print("factor")
+        elif a % b == 0:
+            print("multiple")
+        else:
+            print("neither")
+except EOFError:
+    pass
