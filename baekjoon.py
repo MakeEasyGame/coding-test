@@ -1,7 +1,8 @@
 import math
+
 a = int(input())
-lst = map(int, input().split())
-result = 0
+b = int(input())
+lst = []
 def isPrime(n):
     if n == 1:
         return False
@@ -10,7 +11,12 @@ def isPrime(n):
             return False
     return True
 
-for i in lst:
+for i in range(a, b+1):
     if isPrime(i):
-        result+=1
-print(result)
+        lst.append(i)
+
+if len(lst) > 0:
+    print(sum(lst))
+    print(lst[0])
+else:
+    print(-1)
